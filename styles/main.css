@@ -1,3 +1,11 @@
 body{
     background-color: black;
 }
+
+.square{
+    background-color: hotpink;
+    color: pink;
+    width: 10px;
+    height: 10px;
+    position: inherit;
+}
