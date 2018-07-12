@@ -35,13 +35,13 @@ $(document).ready(function(){
     $(document).click(function createSquare(e){
         $("body").append(" <div class='square'><p>square</p></div> "); 
         $("div").last().offset({left:e.pageX, right:e.pageX, top:e.pageY, bottom:e.pageY});
-        //a = e.pageX;
+        a = e.pageX;
     });
     if ($(".square")){
-        $(".square").each(function(index) {
-            setInterval(function(){ 
-                a +=10;
-                $(".square").eq(index).css("left", a);
-            }, 1000);
-        });
+        setInterval(function(){ 
+            a +=10;
+            $(".square").css("left", a);
+        }, 1000);
+        //$(".square").each(function(index) {
+        //});
 }});
