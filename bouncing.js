@@ -1,17 +1,13 @@
 // change element size according to length of click
-
-
-
+let square = document.getElementsByClassName("square");
+let a = 10;
 // make element move toward screen edge
 // square object distance to edge top/right/botom/left - choose the smallest one then move towards it
 
 //get window user size and use in here according to where the square is
 
-
-function moveTop(){
-    let square = document.getElementsByClassName("square");
-    square.style.bottom = parseInt(square.style.bottom) + 10 + "px";
-    moveTowardsEdge = setTimeout(moveTop,20);
+function moveTop(a){
+    $(".square").css("left", a);
 };
 
 function moveRight(){
@@ -30,16 +26,22 @@ function moveLeft(){
 };
 
 function moveTowardsEdge() {
-    let square = document.getElementsByClassName("square");
     moveTop();
 };
 
 
 //JQUERY make element appear on click
 $(document).ready(function(){
-    $(document).click(function(e){
-        $("body").append(" <div class='square'><p>square</p></div> ");
+    $(document).click(function createSquare(e){
+        $("body").append(" <div class='square'><p>square</p></div> "); 
         $("div").last().offset({left:e.pageX, right:e.pageX, top:e.pageY, bottom:e.pageY});
-        moveTowardsEdge();
+        //a = e.pageX;
     });
-});
+    if ($(".square")){
+        $(".square").each(function(index) {
+            setInterval(function(){ 
+                a +=10;
+                $(".square").eq(index).css("left", a);
+            }, 1000);
+        });
+}});
