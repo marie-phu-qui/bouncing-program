@@ -34,13 +34,13 @@ function moveTowardsEdge() {
 $(document).ready(function(){
     $(document).click(function createSquare(e){
         $("body").append(" <div class='square'><p>square</p></div> "); 
-        $("div").last().offset({left:e.pageX, right:e.pageX, top:e.pageY, bottom:e.pageY});
+        $(".square").last().offset({left:e.pageX, right:e.pageX, top:e.pageY, bottom:e.pageY});
         a = e.pageX;
     });
     if ($(".square")){
         setInterval(function(){ 
             a +=10;
-            $(".square").css("left", a);
+            $(".square:last").css("left", a);
         }, 1000);
         //$(".square").each(function(index) {
         //});
