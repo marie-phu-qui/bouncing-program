@@ -19,20 +19,31 @@ $(document).ready(function(){
 
     //make element move towards right if it is closer to the right edge
     // 
-    setInterval(function move(){
+    setInterval(function move(square){
         $(".square").each(function(){
             if(parseFloat($(".square:last").css("left")) > (screenWidth/2)){
-                setInterval(function goRight(){ 
-                    a +=10;
-                    $( ".square:last" ).css("left", a);
-                }, 1000);   
+                //setInterval(function goRight(){ 
+                    while(parseFloat($(".square:last").css("left")) > (screenWidth/2)){
+                        a +=1;
+                        $( ".square:last" ).css("left", a);
+                    };
+                    return;
+                //}, 1000);   
             }
-            else if(parseFloat($(".square:last").css("left")) < (screenWidth/2)) {
-                setInterval(function goLeft(){ 
-                    a -=10;
+            else if(parseFloat($(this).css("left")) < (screenWidth/2)) {
+                /*setInterval(function goLeft(){ 
+                    a -=1;
                     $( ".square:last" ).css("left", a);
                 }, 1000);   
+                };*/
+                    while(parseFloat($(".square:last").css("left")) < (screenWidth/2)){
+                        a -=1;
+                        $( ".square:last" ).css("left", a);
+                    };
+                    return;
                 };
-            });
-        }, 1000);
+            return;
+            }, 1000)
+            return;
+        });
 });
