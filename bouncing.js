@@ -1,49 +1,52 @@
-// change element size according to length of click
-
-
-let square = document.getElementsByClassName("square");
-let a = 10;
 let screenWidth = $(window).width();
 let screenHeight = $(window).height();
+let square = $(".square");
+let squareX = 0;
+let squareY = 0;
+let squareSpeedX = 1;
+let squareSpeedY = 1;
+
+const framePerSecond = 30;
 
 
-//JQUERY make element appear on click
 $(document).ready(function(){
-    $(document).click(function createSquare(e){
-        $("body").append(" <div class='square'><p>square</p></div> "); 
-        $(".square").last().offset({left:e.pageX, top:e.pageY});
-        a = e.pageX;
-        b = e.pageY;
-    });
-    // square object distance to edge top/right/botom/left - choose the smallest one
+  $(document).click(function createSquare(e){
+    $("body").append("<div class='square'<p>square</p></div>");
+    $(".square").last().offset({left:e.pageX, top:e.pageY});
 
-    //make element move towards right if it is closer to the right edge
-    // 
-    setInterval(function move(square){
-        $(".square").each(function(){
-            if(parseFloat($(".square:last").css("left")) > (screenWidth/2)){
-                //setInterval(function goRight(){ 
-                    while(parseFloat($(".square:last").css("left")) > (screenWidth/2)){
-                        a +=1;
-                        $( ".square:last" ).css("left", a);
-                    };
-                    return;
-                //}, 1000);   
-            }
-            else if(parseFloat($(this).css("left")) < (screenWidth/2)) {
-                /*setInterval(function goLeft(){ 
-                    a -=1;
-                    $( ".square:last" ).css("left", a);
-                }, 1000);   
-                };*/
-                    while(parseFloat($(".square:last").css("left")) < (screenWidth/2)){
-                        a -=1;
-                        $( ".square:last" ).css("left", a);
-                    };
-                    return;
-                };
-            return;
-            }, 1000)
-            return;
-        });
+    e.pageX = squareX;
+    e.pageY = squareY;
+
+    screenWidth = $(window).width();
+    screenHeight = $(window).height();
+  });
 });
+
+setInterval(function makeMove(){
+  // check is there are squares on the screen
+  if($(".square")){
+    // for all the squares do this
+    $(".square").each(function(){
+      squareX += squareSpeedX;
+      squareY += squareSpeedY;
+      
+      // if touch right
+      if(squareX>=screenWidth){
+          squareSpeedX = -squareSpeedX;
+          }   
+      // if touch left     
+      else if(squareX<=0){
+          squareSpeedX = -squareSpeedX;      
+        }
+      // if touch top
+      if(squareY>=screenHeight){
+          squareSpeedY = -squareSpeedY;
+      }
+      // if touch bottom
+      else if(squareY<=0){
+          squareSpeedY = -squareSpeedY;
+      }
+    $(".square").offset({left:squareX, top:squareY})
+    })
+  };
+},1000/framePerSecond);
