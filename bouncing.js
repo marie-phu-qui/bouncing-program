@@ -11,7 +11,7 @@ let squareSpeedY = [5];
 let squareHeight;
 let squareWidth;
 
-const framePerSecond = 30;
+const framePerSecond = 60;
 
 
 $(document).ready(function(){
