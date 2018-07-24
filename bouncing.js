@@ -6,8 +6,8 @@ let squareX;
 let squareY;
 let squareSpeedX = [5];
 let squareSpeedY = [5];
+let i;
 
-// PROBLEME squareHeight and squareWidth return - NaN but parseFloat($(".square").css("height")) returns 50...
 let squareHeight;
 let squareWidth;
 
@@ -39,17 +39,16 @@ $(document).ready(function(){
     squareNum = $("div.square").length;
     square = $(".square");
     // check is there are squares on the screen inside the Interval (cost more)
-      for(let i=0; i<squareNum;i++){
-        $(".square").each(function(){
 
+        $(".square").each(function(){
+          for(i=0; i<squareNum;i++){
             squareX = $(this).position().left;
             squareY = $(this).position().top;
-
 
             // if touch right
             if(squareX >= (screenWidth - squareWidth) ){
               squareSpeedX[i] = -squareSpeedX[i];
-                }
+              }
             // if touch left
             else if(squareX <= 0){
               squareSpeedX[i] = -squareSpeedX[i];
@@ -57,17 +56,19 @@ $(document).ready(function(){
             // if touch top
             else if(squareY >= (screenHeight - squareHeight) ){
               squareSpeedY[i] = -squareSpeedY[i];
-            }
+              }
             // if touch bottom
             else if(squareY <= 0){
               squareSpeedY[i] = -squareSpeedY[i];
-            }
+              }
 
             squareX += squareSpeedX[i];
             squareY += squareSpeedY[i];
 
-            $(this).offset({left:squareX, top:squareY})
+            console.log(squareX, squareY, "square " + i, "touch right ="+ (squareX >= (screenWidth - squareWidth)), "touch left = "+(squareX <= 0), squareSpeedX[i], "touch top = "+(squareY >= (screenHeight - squareHeight)), "touch bottom + "+(squareY <= 0), squareSpeedY[i]);
+
+            $(this).offset({left:squareX, top:squareY});
+            }
           })
-      }
-    }, 1000/framePerSecond);
+    }, 10000/framePerSecond);
 //}
