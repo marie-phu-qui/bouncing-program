@@ -39,18 +39,23 @@ $(document).ready(function(){
 setInterval(function checkSquare(){
   if($("div.square").length>0){
     squareNum = $(".square").length;
-    square = $(".square");
+    square = $("div.square");
 
     //log the presence of square
-    console.log("there is a square on screen")
+    console.log("there is a square on screen");
+    makeMove(square);
   }
- } , 100000/framePerSecond);
+ } , 1000/framePerSecond);
 
-  
-  $("div.square").each(function(){
-    setInterval(function makeMove(square){
-      $("div.square").each(function(){
+
+
+function makeMove(square){
+      $(square).each(function(){
         for(i=0; i<squareNum;i++){
+          // check for current window size
+          screenWidth = $(window).width();
+          screenHeight = $(window).height();
+
           squareY = $(this).position().top;
           squareX = $(this).position().left;
 
@@ -81,6 +86,4 @@ setInterval(function checkSquare(){
           console.log("square " + i, $(this).position())
           }
         })
-  }, 100000/framePerSecond);
-}
-)
+  }
