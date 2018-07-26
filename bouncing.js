@@ -1,6 +1,7 @@
 let screenWidth = $(window).width();
 let screenHeight = $(window).height();
-let square = $(".square");
+//square already defined
+//let square = $(".square");
 let squareNum = $(".square").length;
 let squareX;
 let squareY;
@@ -14,6 +15,7 @@ var squareColors = ["green","blue", "pink"];
 
 
 const framePerSecond = 60;
+const square = $('<div>').addClass('square').data({ squareSpeedX: 5, squareSpeedY: 5});
 
 
 $(document).ready(function(){
@@ -39,10 +41,12 @@ $(document).ready(function(){
 setInterval(function checkSquare(){
   if($("div.square").length>0){
     squareNum = $(".square").length;
-    square = $("div.square");
+    //square already defined
+    //square = $("div.square");
 
     //log the presence of square
     console.log("there is a square on screen");
+    //call the movement of the square
     makeMove(square);
   }
  } , 1000/framePerSecond);
@@ -51,10 +55,15 @@ setInterval(function checkSquare(){
 
 function makeMove(square){
       $(square).each(function(){
-        for(i=0; i<squareNum;i++){
+        // only keep for each
+        //for(i=0; i<squareNum;i++){
           // check for current window size
           screenWidth = $(window).width();
           screenHeight = $(window).height();
+
+
+          const squareSpeedX = $(this).data("squareSpeedX");
+          const squareSpeedY = $(this).data("squareSpeedY");
 
           squareY = $(this).position().top;
           squareX = $(this).position().left;
@@ -75,15 +84,18 @@ function makeMove(square){
           else if(squareY <= 0){
             squareSpeedY[i] = -squareSpeedY[i];
             }
-
+          
+          // this will increment the position to create movement
           squareX += squareSpeedX[i];
           squareY += squareSpeedY[i];
 
           console.log(squareY, squareX, "square " + i, "touch right ="+ (squareX >= (screenWidth - squareWidth)), "touch left = "+(squareX <= 0), squareSpeedX[i], "touch bottom = "+(squareY >= (screenHeight - squareHeight)), "touch top + "+(squareY <= 0), squareSpeedY[i]);
-
+          
+          //this will apply the new position value to move the square 
           $(this).offset({top:squareY, left:squareX});
 
           console.log("square " + i, $(this).position())
-          }
+          // only keep for each
+          // }
         })
   }
